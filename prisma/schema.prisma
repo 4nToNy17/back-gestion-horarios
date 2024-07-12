@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Horario {
+  ID_Horario Int      @id(map: "PK__Horario__77A009BD25F40C3A")
+  DiaSemana  String   @db.VarChar(15)
+  HoraInicio DateTime @db.Time
+  HoraFin    DateTime @db.Time
+}
+
+model Reserva {
+  idReserva    Int      @id(map: "PK__Reserva__94D104C81CAF3FC9")
+  Usuario      String   @db.VarChar(20)
+  FechaReserva DateTime @db.Date
+  Descripcion  String   @db.VarChar(50)
+  Estado       String   @db.VarChar(20)
+  Horario      String   @db.VarChar(20)
+}
+
+model Usuario {
+  ID_Usuario        Int     @id(map: "PK__Usuario__DE4431C515DC2A82")
+  Nombre            String  @db.VarChar(50)
+  Apellido          String  @db.VarChar(50)
+  CorreoElectr_nico String  @map("CorreoElectrónico") @db.VarChar(100)
+  Contrase_a        String  @map("Contraseña") @db.VarChar(100)
+  Tel_fono          String? @map("Teléfono") @db.VarChar(15)
+}
